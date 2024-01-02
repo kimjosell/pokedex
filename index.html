@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <title>Pokedex</title>
+</head>
+<body>
+    <main>
+        <div id="container-1">
+            <div id="mainPage">
+                <button id="searchButton" class="mainButtons">SEARCH POKéMON</button>
+                <button id="viewPokedex" class="mainButtons" onclick="openPokedex()">VIEW POKéDEX</button>
+            </div>
+            <div id="pokemonList">
+                <div class="miniHeader">
+                    <button id="goBack" class="goBackBtn" onclick="goBack1()">BCK</button>
+                    <button id="searchButton2" class="searchBtn">SEARCH POKéMON</button>
+                </div>
+                <div id="pokemonList2">
+                    <!-- <button class="pokemonNameButton"><span class="pokemonTextName">POKEMON NAME</span><img class="pokeballImgIcon" src="images/pokeball.png" alt=""></button> -->
+                </div>
+            </div>
+            <div id="pokemonInfo">
+                <div class="miniHeader">
+                    <button class="pokeButtons" id="infoPokemon">INFO</button>
+                    <button class="pokeButtons" id="cryPokemon">CRY</button>
+                    <button class="pokeButtons" id="sizePokemon">SIZE</button>
+                    <button class="goBackBtn" onclick="goBack2()">BCK</button>
+                </div>
+                <div class="infoPokemonView1">
+                    <button id="backPokemon" class="infoButtons"><span class="material-symbols-outlined">arrow_upward</span> BACK</button>
+                    <button id="nextPokemon" class="infoButtons">NEXT <span class="material-symbols-outlined">arrow_downward</span></button>
+                </div>
+            </div>
+        </div>
+        <div id="container-2">
+            <div id="welcomeText">
+                <h2>POKéDEX</h2>
+                <p>Thanks for using the POKéDEX created by Kim Josell thanks to PokeAPI</p>
+            </div>
+            <div id="infoPokemonView2">
+                <div id="miniHeader2">
+                    <h2>INFO</h2>
+                </div>
+                <div class="pokemonPhotoContainer">
+                    <div class="pokemonPhotoContainer2">
+                        <div class="pokemonPhotoContainer3"></div>
+                    </div>
+                </div>
+                <div class="pokemonPhotoContainer4">
+                    <img id="pokemonImage" src="" alt="pokemon image">
+                </div>
+                <div class="infoContainer">
+                    <img src="images/pokeball.png" alt="pokeball Icon">
+                </div>
+                <h2 id="pokemonNumber"></h2>
+                <h2 id="pokemonTitleName"></h2>
+                <div class="typeNameContainer">
+                    <h3 id="pokemonTypeName"></h3>
+                </div>
+                <div id="typesContainer">
+                    <!-- <span class="pokemonType">WATER</span> -->
+                </div>
+                <div class="pawContainer">
+                    <div class="pawContainer1"></div>
+                </div>
+                <div class="lineInTheMiddle"></div>
+                <div class="characteristics"></div>
+                <p class="HT">HT</p>
+                <p class="WT">WT</p>
+                <p id="height">1'04''</p>
+                <p id="weight"></p>
+                <div class="descriptionBox"></div>
+                <div class="sideLeftBox"></div>
+                <div id="descriptionTextBox"><p id="descriptionPokemonText"></p></div>
+                <div class="sideRigthBox"></div>
+            </div>
+        </div>
+    </main>
+    <script src="scripts/script.js"></script>
+</body>
+</html>
