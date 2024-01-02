@@ -56,8 +56,6 @@ const makePokemonNameSmall = (textLength) => {
         return '1.6rem';
     }else if (textLength >= 28){
         return '1.5rem';
-    }else {
-        return '2rem';
     }
 }
 const openPokedex = () => {
