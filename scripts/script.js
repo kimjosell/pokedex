@@ -19,6 +19,8 @@ let descriptionPokemonText = document.getElementById('descriptionPokemonText');
 const backPokemonButton = document.getElementById('backPokemon');
 const nextPokemonButton = document.getElementById('nextPokemon');
 let typesContainer = document.getElementById('typesContainer');
+let pushSound = document.getElementById('pushSound');
+let englishVoice = document.getElementById('englishVoice');
 
 const startup = async() => {
     await getMaximunNumberOfPokemons();
@@ -61,23 +63,29 @@ const makePokemonNameSmall = (textLength) => {
 const openPokedex = () => {
     mainPage.style.display = 'none';
     pokemonList.style.display = 'block';
+    pushSound.play();
 }
 const goBack1 = () => {
     mainPage.style.display = 'flex';
     pokemonList.style.display = 'none';
+    pushSound.play();
 }
 const goBack2 = () => {
     pokemonInfo.style.display = 'none';
     pokemonList.style.display = 'block';
     infoPokemonView2.style.display = 'none';
     welcomeText.style.display = 'grid';
+    pushSound.play();
 }
 const getNumberOfPokemon  = () => {
     pokemonNumber = event.srcElement.id;
     pokemonNumber = Number(pokemonNumber);
-    console.log(pokemonNumber);
-    console.log(typeof pokemonNumber);
     openPokemonDetails();
+}
+const playEnglishVoice = () => {
+    let numberFile = pokemonNumber;
+    englishVoice.src = `audio/English/englishvoice (${numberFile}).wav`;
+    englishVoice.play();
 }
 const openPokemonDetails = async () => {
     await getInfoPokemon();
@@ -88,14 +96,17 @@ const openPokemonDetails = async () => {
     backPokemonButton.onclick = goPokemonBefore;
     nextPokemonButton.onclick = goPokemonAfter;
     changeInfoPokemon();
+    playEnglishVoice();
 }
 const goPokemonBefore = () => {
     pokemonNumber -= 1;
     openPokemonDetails();
+    pushSound.play();
 }
 const goPokemonAfter = () => {
     pokemonNumber += 1;
     openPokemonDetails();
+    pushSound.play();
 }
 const getInfoPokemon = async () => {
     const APIResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonNumber}`);
@@ -153,16 +164,19 @@ const createBannerType = (typeName) => {
 const changePokemonType = () => {
     removePreviousBanners();
     let amountOfTypes = dataPokemon.types;
-    console.log(amountOfTypes);
     amountOfTypes.forEach((element) => {
         createBannerType(element.type.name);   
     });
 }
 const changePokemonHeight = () => {
-    height.textContent = `${dataPokemon.height}''`;
+    let temporalHeight = dataPokemon.height;
+    temporalHeight /= 10;
+    height.textContent = `${temporalHeight} m`;
 }
 const changePokemonweight = () => {
-    weight.textContent = `${dataPokemon.weight} lbs`;
+    let temporalWeight = dataPokemon.weight;
+    temporalWeight /= 10;
+    weight.textContent = `${temporalWeight} kg`;
 }
 const changePokemonDescription = () =>{
     descriptionPokemonText.textContent = `${speciesDataPokemon.flavor_text_entries[11].flavor_text}`;

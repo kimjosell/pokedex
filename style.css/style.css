@@ -22,6 +22,9 @@ main {
     justify-content: space-between;
     margin-top: 30px;
 }
+audio {
+    display: none;
+}
 #container-1 {
     width: 650px;
     height: 500px;
