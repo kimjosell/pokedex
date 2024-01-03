@@ -1,4 +1,4 @@
-let maximunNumberOfPokemon = 0;
+let maximunNumberOfPokemon = 649;
 let dataPokemonNamesAndNumbers = [];
 let dataPokemon = [];
 let speciesDataPokemon = [];
@@ -29,7 +29,7 @@ const startup = async() => {
 const getMaximunNumberOfPokemons = async () => {
     const APIResponse = await fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=10000');
     dataPokemonNamesAndNumbers = await APIResponse.json();
-    maximunNumberOfPokemon = dataPokemonNamesAndNumbers.results.length;
+    // maximunNumberOfPokemon = dataPokemonNamesAndNumbers.results.length;
     return maximunNumberOfPokemon;
 }
 const renderList = () => {
@@ -40,6 +40,7 @@ const renderList = () => {
         let span = document.createElement('span');
         span.classList.toggle('pokemonTextName');
         pokemonNameButton.id = `${i+1}`;
+        span.id =`${i+1}`;
         span.textContent = `${i+1} ${dataPokemonNamesAndNumbers.results[i].name.toUpperCase()}`;
         let textLength = span.textContent.length;
         span.style.fontSize = (makePokemonNameSmall(textLength));
@@ -141,6 +142,9 @@ const changePokemonNumber = () => {
     }
 const changePokemonName = () => {
     pokemonTitleName.textContent = `${dataPokemon.name.toUpperCase()}`;
+    if (pokemonTitleName.textContent.length > 9){
+        pokemonTitleName.textContent = pokemonTitleName.textContent.substring(0,9);
+    }
 }
 const changePokemonTypeName = () => {
     let pokemonTypeNameBefore = `${speciesDataPokemon.genera[7].genus.toUpperCase()}`;
@@ -171,14 +175,20 @@ const changePokemonType = () => {
 const changePokemonHeight = () => {
     let temporalHeight = dataPokemon.height;
     temporalHeight /= 10;
-    height.textContent = `${temporalHeight} m`;
+    temporalHeight *= 3.2;
+    temporalHeight = Math.ceil(temporalHeight);
+    height.textContent = `${temporalHeight}''`;
 }
 const changePokemonweight = () => {
     let temporalWeight = dataPokemon.weight;
     temporalWeight /= 10;
-    weight.textContent = `${temporalWeight} kg`;
+    temporalWeight *= 2.2;
+    temporalWeight = Math.ceil(temporalWeight);
+    weight.textContent = `${temporalWeight} lbs`;
 }
 const changePokemonDescription = () =>{
-    descriptionPokemonText.textContent = `${speciesDataPokemon.flavor_text_entries[11].flavor_text}`;
+    let descriptionPokemonTextIndex = speciesDataPokemon.flavor_text_entries.find((entry) => entry.version.name === 'white-2');
+    console.log(descriptionPokemonTextIndex);
+    descriptionPokemonText.textContent = `${descriptionPokemonTextIndex.flavor_text}`;
 }
 startup();
