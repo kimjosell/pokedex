@@ -28,6 +28,7 @@ let heightSize = document.getElementById('heightSize');
 let pokemonSizeImg = document.getElementById('pokemonSizeImg');
 let pokemonSizeName = document.getElementById('pokemonSizeName');
 let humanSizeImg = document.getElementById('humanSizeImg');
+let pawPokemonImg = document.getElementById('pawPokemonImg');
 
 const startup = async() => {
     await getMaximunNumberOfPokemons();
@@ -134,12 +135,17 @@ const changeInfoPokemon = () => {
     changePokemonTypeName();
     changePokemonType();
     changePokemonPhoto();
+    changePokemonPaw();
     changePokemonHeight(getPokemonHeight());
     changePokemonWeight(getPokemonWeight());
     changePokemonDescription();
 }
 const changePokemonPhoto = () => {
     pokemonImage.src = dataPokemon['sprites']['versions']['generation-v']['black-white']['animated']['front_default'];
+}
+const changePokemonPaw = () => {
+    let numberFile = pokemonNumber;
+    pawPokemonImg.src = `images/footprints/${numberFile}.png`;
 }
 const changePokemonNumber = () => {
     pokemonnumberContainer.textContent = pokemonNumber;

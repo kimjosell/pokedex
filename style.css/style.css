@@ -382,9 +382,15 @@ audio {
     width: 80%;
     height: 80%;
     border-radius: 50% ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #F8F8FF;
     border: solid 2px #337caa;
     z-index: 2;
+}
+#pawPokemonImg {
+    width: 40%;
 }
 #typesContainer {
     grid-column: 10/14;
