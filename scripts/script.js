@@ -7,6 +7,7 @@ let pokemonList2 = document.getElementById('pokemonList2');
 let pokemonList = document.getElementById('pokemonList');
 let infoPokemonView2 = document.getElementById('infoPokemonView2');
 let pokemonInfo = document.getElementById('pokemonInfo');
+let infoPokemon = document.getElementById('infoPokemon');
 let welcomeText = document.getElementById('welcomeText');
 let pokemonNumber = '';
 let pokemonImage = document.getElementById('pokemonImage');
@@ -21,6 +22,12 @@ const nextPokemonButton = document.getElementById('nextPokemon');
 let typesContainer = document.getElementById('typesContainer');
 let pushSound = document.getElementById('pushSound');
 let englishVoice = document.getElementById('englishVoice');
+let sizePokemonButton = document.getElementById('sizePokemon');
+let sizePokemonView2 = document.getElementById('sizePokemonView2');
+let heightSize = document.getElementById('heightSize');
+let pokemonSizeImg = document.getElementById('pokemonSizeImg');
+let pokemonSizeName = document.getElementById('pokemonSizeName');
+let humanSizeImg = document.getElementById('humanSizeImg');
 
 const startup = async() => {
     await getMaximunNumberOfPokemons();
@@ -76,6 +83,7 @@ const goBack2 = () => {
     pokemonList.style.display = 'block';
     infoPokemonView2.style.display = 'none';
     welcomeText.style.display = 'grid';
+    sizePokemonView2.style.display = 'none';
     pushSound.play();
 }
 const getNumberOfPokemon  = () => {
@@ -94,10 +102,13 @@ const openPokemonDetails = async () => {
     pokemonList.style.display = 'none';
     pokemonInfo.style.display = 'block';
     welcomeText.style.display = 'none';
+    sizePokemonView2.style.display = 'none';
     backPokemonButton.onclick = goPokemonBefore;
     nextPokemonButton.onclick = goPokemonAfter;
     changeInfoPokemon();
     playEnglishVoice();
+    sizePokemonButton.onclick = openPokemonSize;
+    infoPokemon.onclick = openPokemonDetails;
 }
 const goPokemonBefore = () => {
     pokemonNumber -= 1;
@@ -123,12 +134,12 @@ const changeInfoPokemon = () => {
     changePokemonTypeName();
     changePokemonType();
     changePokemonPhoto();
-    changePokemonHeight();
-    changePokemonweight();
+    changePokemonHeight(getPokemonHeight());
+    changePokemonWeight(getPokemonWeight());
     changePokemonDescription();
 }
 const changePokemonPhoto = () => {
-    pokemonImage.src = dataPokemon['sprites']['versions']['generation-v']['black-white']['animated']['front_default'];;
+    pokemonImage.src = dataPokemon['sprites']['versions']['generation-v']['black-white']['animated']['front_default'];
 }
 const changePokemonNumber = () => {
     pokemonnumberContainer.textContent = pokemonNumber;
@@ -147,11 +158,12 @@ const changePokemonName = () => {
     }
 }
 const changePokemonTypeName = () => {
-    let pokemonTypeNameBefore = `${speciesDataPokemon.genera[7].genus.toUpperCase()}`;
-    let pokemonTypeNameSplitted = pokemonTypeNameBefore.split(' POKÉMON');
-    pokemonTypeName.textContent = pokemonTypeNameSplitted[0];
+    let pokemonTypeNameBefore = `${speciesDataPokemon.genera[7].genus}`;
+    pokemonTypeName.textContent = pokemonTypeNameBefore;
     if (pokemonTypeName.textContent.length > 15){
-        pokemonTypeName.textContent = pokemonTypeName.textContent.substring(0,14);
+        let pokemonTypeNameSplitted = pokemonTypeNameBefore.split(' Pokémon');
+        pokemonTypeName.textContent = pokemonTypeNameSplitted[0];
+        pokemonTypeName.textContent = pokemonTypeName.textContent.substring(0,15);
     }
 }
 const removePreviousBanners = () =>{
@@ -172,23 +184,68 @@ const changePokemonType = () => {
         createBannerType(element.type.name);   
     });
 }
-const changePokemonHeight = () => {
+const getPokemonHeight = () => {
     let temporalHeight = dataPokemon.height;
     temporalHeight /= 10;
     temporalHeight *= 3.2;
-    temporalHeight = Math.ceil(temporalHeight);
-    height.textContent = `${temporalHeight}''`;
+    temporalHeight = temporalHeight.toFixed(2);
+    return temporalHeight;
 }
-const changePokemonweight = () => {
+const changePokemonHeight = (temporalHeight) => {
+    let temporalHeightSplitted = temporalHeight.split('.');
+    height.textContent = `${temporalHeightSplitted[0]}'${temporalHeightSplitted[1]}''`;
+}
+const getPokemonWeight = () => {
     let temporalWeight = dataPokemon.weight;
     temporalWeight /= 10;
     temporalWeight *= 2.2;
-    temporalWeight = Math.ceil(temporalWeight);
+    temporalWeight = temporalWeight.toFixed(2);
+    return temporalWeight;
+}
+const changePokemonWeight = (temporalWeight) => {
+    if (temporalWeight.length >= 6) {
+        temporalWeight = Math.ceil(temporalWeight);
+    }
     weight.textContent = `${temporalWeight} lbs`;
 }
 const changePokemonDescription = () =>{
     let descriptionPokemonTextIndex = speciesDataPokemon.flavor_text_entries.find((entry) => entry.version.name === 'white-2');
     console.log(descriptionPokemonTextIndex);
     descriptionPokemonText.textContent = `${descriptionPokemonTextIndex.flavor_text}`;
+}
+const changePokemonSizeInfo = (temporalHeight) => {
+    let temporalHeightSplitted = temporalHeight.split('.');
+    heightSize.textContent = `${temporalHeightSplitted[0]}'${temporalHeightSplitted[1]}''`
+}
+const changePokemonHeightImg = () =>{
+    pokemonSizeImg.src = dataPokemon['sprites']['versions']['generation-v']['black-white']['animated']['front_default'];
+}
+const rezisingPokemonHeightImg = (pokemonHeight, humanHeight) =>{
+    let porcentagePokemonHeight = pokemonHeight * 80;
+    porcentagePokemonHeight /= humanHeight;
+    console.log(porcentagePokemonHeight);
+    if (porcentagePokemonHeight > 80){
+        pokemonSizeImg.style.height = '80%';
+        let porcentageHumanHeight = humanHeight * 80;
+        porcentageHumanHeight /= pokemonHeight;
+        humanSizeImg.style.height = `${porcentageHumanHeight}%`;
+    } else {
+        pokemonSizeImg.style.height = `${porcentagePokemonHeight}%`;
+    }
+}
+const changePokemonSizeName = () => {
+        pokemonSizeName.textContent = `${dataPokemon.name.toUpperCase()}`;
+        if (pokemonSizeName.textContent.length > 9){
+            pokemonSizeName.textContent = pokemonSizeName.textContent.substring(0,9);
+        }
+}
+const openPokemonSize = () => {
+    infoPokemonView2.style.display = 'none';
+    sizePokemonView2.style.display = 'grid';
+    pushSound.play();
+    changePokemonSizeName();
+    changePokemonSizeInfo(getPokemonHeight());
+    changePokemonHeightImg();
+    rezisingPokemonHeightImg(getPokemonHeight(), 5.8);
 }
 startup();
