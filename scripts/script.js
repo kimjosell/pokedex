@@ -5,12 +5,14 @@ let speciesDataPokemon = [];
 let fontSizePokemonName = '';
 let pokemonList2 = document.getElementById('pokemonList2');
 let pokemonList = document.getElementById('pokemonList');
+let infoPokemonView1 = document.querySelector('.infoPokemonView1');
 let infoPokemonView2 = document.getElementById('infoPokemonView2');
 let pokemonInfo = document.getElementById('pokemonInfo');
 let infoPokemon = document.getElementById('infoPokemon');
 let welcomeText = document.getElementById('welcomeText');
 let pokemonNumber = '';
 let pokemonImage = document.getElementById('pokemonImage');
+let pawPokemonImg = document.getElementById('pawPokemonImg');
 let weight = document.getElementById('weight');
 let pokemonnumberContainer = document.getElementById('pokemonNumber');
 let pokemonTitleName = document.getElementById('pokemonTitleName');
@@ -25,10 +27,18 @@ let englishVoice = document.getElementById('englishVoice');
 let sizePokemonButton = document.getElementById('sizePokemon');
 let sizePokemonView2 = document.getElementById('sizePokemonView2');
 let heightSize = document.getElementById('heightSize');
-let pokemonSizeImg = document.getElementById('pokemonSizeImg');
-let pokemonSizeName = document.getElementById('pokemonSizeName');
-let humanSizeImg = document.getElementById('humanSizeImg');
-let pawPokemonImg = document.getElementById('pawPokemonImg');
+let weightSize = document.getElementById('weightSize');
+let pokemonHeightImg = document.getElementById('pokemonHeightImg');
+let pokemonSizeName = document.querySelectorAll('.pokemonSizeName');
+let humanHeightImg = document.getElementById('humanHeightImg');
+let sizePokemonView1 = document.querySelector('.sizePokemonView1');
+let heightButton = document.getElementById('heightButton');
+let weightButton = document.getElementById('weightButton');
+let heightView = document.getElementById('heightView');
+let weightView = document.getElementById('weightView');
+let pokemonWeightImg = document.getElementById('pokemonWeightImg');
+let humanWeightImg = document.getElementById('humanWeightImg')
+let balanceImg = document.getElementById('balanceImg');
 
 const startup = async() => {
     await getMaximunNumberOfPokemons();
@@ -43,18 +53,19 @@ const getMaximunNumberOfPokemons = async () => {
 const renderList = () => {
     for (let i = 0; i <= maximunNumberOfPokemon-1; i++) {
         let pokemonNameButton = document.createElement('button');
-        pokemonNameButton.classList.toggle('pokemonNameButton');
+        pokemonNameButton.classList.add('pokemonNameButton');
         pokemonNameButton.onclick = getNumberOfPokemon;
         let span = document.createElement('span');
-        span.classList.toggle('pokemonTextName');
-        pokemonNameButton.id = `${i+1}`;
-        span.id =`${i+1}`;
+        span.classList.add('pokemonTextName');
+        pokemonNameButton.name = `${i+1}`;
+        span.name =`${i+1}`;
         span.textContent = `${i+1} ${dataPokemonNamesAndNumbers.results[i].name.toUpperCase()}`;
         let textLength = span.textContent.length;
         span.style.fontSize = (makePokemonNameSmall(textLength));
         let img = document.createElement('img');
-        img.classList.toggle('pokeballImgIcon');
+        img.classList.add('pokeballImgIcon');
         img.src = 'images/pokeball.png';
+        img.name =`${i+1}`;
         pokemonNameButton.appendChild(span);
         pokemonNameButton.appendChild(img);
         pokemonList2.appendChild(pokemonNameButton);
@@ -88,7 +99,7 @@ const goBack2 = () => {
     pushSound.play();
 }
 const getNumberOfPokemon  = () => {
-    pokemonNumber = event.srcElement.id;
+    pokemonNumber = event.srcElement.name;
     pokemonNumber = Number(pokemonNumber);
     openPokemonDetails();
 }
@@ -99,10 +110,12 @@ const playEnglishVoice = () => {
 }
 const openPokemonDetails = async () => {
     await getInfoPokemon();
+    infoPokemonView1.style.display = 'flex';
     infoPokemonView2.style.display = 'grid';
     pokemonList.style.display = 'none';
     pokemonInfo.style.display = 'block';
     welcomeText.style.display = 'none';
+    sizePokemonView1.style.display = 'none';
     sizePokemonView2.style.display = 'none';
     backPokemonButton.onclick = goPokemonBefore;
     nextPokemonButton.onclick = goPokemonAfter;
@@ -219,39 +232,129 @@ const changePokemonDescription = () =>{
     console.log(descriptionPokemonTextIndex);
     descriptionPokemonText.textContent = `${descriptionPokemonTextIndex.flavor_text}`;
 }
-const changePokemonSizeInfo = (temporalHeight) => {
+const changePokemonHeightInfo = (temporalHeight) => {
     let temporalHeightSplitted = temporalHeight.split('.');
     heightSize.textContent = `${temporalHeightSplitted[0]}'${temporalHeightSplitted[1]}''`
 }
 const changePokemonHeightImg = () =>{
-    pokemonSizeImg.src = dataPokemon['sprites']['versions']['generation-v']['black-white']['animated']['front_default'];
+    pokemonHeightImg.src = dataPokemon['sprites']['versions']['generation-v']['black-white']['animated']['front_default'];
 }
 const rezisingPokemonHeightImg = (pokemonHeight, humanHeight) =>{
     let porcentagePokemonHeight = pokemonHeight * 80;
     porcentagePokemonHeight /= humanHeight;
-    console.log(porcentagePokemonHeight);
     if (porcentagePokemonHeight > 80){
-        pokemonSizeImg.style.height = '80%';
+        pokemonHeightImg.style.height = '80%';
         let porcentageHumanHeight = humanHeight * 80;
         porcentageHumanHeight /= pokemonHeight;
-        humanSizeImg.style.height = `${porcentageHumanHeight}%`;
+        humanHeightImg.style.height = `${porcentageHumanHeight}%`;
     } else {
-        pokemonSizeImg.style.height = `${porcentagePokemonHeight}%`;
+        pokemonHeightImg.style.height = `${porcentagePokemonHeight}%`;
     }
 }
 const changePokemonSizeName = () => {
-        pokemonSizeName.textContent = `${dataPokemon.name.toUpperCase()}`;
-        if (pokemonSizeName.textContent.length > 9){
-            pokemonSizeName.textContent = pokemonSizeName.textContent.substring(0,9);
+    pokemonSizeName.forEach((element) => {
+        element.textContent = `${dataPokemon.name.toUpperCase()}`;
+        if (element.textContent.length > 9){
+            element.textContent = element.textContent.substring(0,9);
         }
+    });
+}
+const changePokemonWeightImg = () => {
+    pokemonWeightImg.src = dataPokemon['sprites']['versions']['generation-v']['black-white']['animated']['front_default'];
+}
+const changePokemonWeightInfo = (temporalWeight) => {
+    if (temporalWeight.length >= 6) {
+        temporalWeight = Math.ceil(temporalWeight);
+    }
+    weightSize.textContent = `${temporalWeight} lbs`;
+}
+const showBalanceImg = (temporalWeight, humanTemporalWeight) => {
+    let parameter = temporalWeight * 60;
+    parameter /= humanTemporalWeight;
+    console.log(parameter);
+    if(parameter <= 10){
+        let imgFile = 1;
+        balanceImg.src = `images/balance_sprites/${imgFile}-modified.png`;
+        pokemonWeightImg.style.marginBottom = '30%';
+        humanWeightImg.style.marginBottom = '15%';
+    }else if(parameter >= 11 && parameter <= 20){
+        let imgFile = 2;
+        balanceImg.src = `images/balance_sprites/${imgFile}-modified.png`;
+        pokemonWeightImg.style.marginBottom = '29%';
+        humanWeightImg.style.marginBottom = '16%';
+    }else if(parameter >= 21 && parameter <= 30){
+        let imgFile = 3;
+        balanceImg.src = `images/balance_sprites/${imgFile}-modified.png`;
+        pokemonWeightImg.style.marginBottom = '27%';
+        humanWeightImg.style.marginBottom = '18%';
+    }else if(parameter >= 31 && parameter <= 40) {
+        let imgFile = 4;
+        balanceImg.src = `images/balance_sprites/${imgFile}-modified.png`;
+        pokemonWeightImg.style.marginBottom = '26%';
+        humanWeightImg.style.marginBottom = '19%';
+    }else if(parameter >= 41 && parameter <= 50) {
+        let imgFile = 5;
+        balanceImg.src = `images/balance_sprites/${imgFile}-modified.png`;
+        pokemonWeightImg.style.marginBottom = '25%';
+        humanWeightImg.style.marginBottom = '20%';
+    }else if(parameter >= 51 && parameter <= 60) {
+        let imgFile = 6;
+        balanceImg.src = `images/balance_sprites/${imgFile}-modified.png`;
+        pokemonWeightImg.style.marginBottom = '22%';
+        humanWeightImg.style.marginBottom = '22%';
+    }else if(parameter >= 61 && parameter <= 70) {
+        let imgFile = 7;
+        balanceImg.src = `images/balance_sprites/${imgFile}-modified.png`;
+        pokemonWeightImg.style.marginBottom = '20%';
+        humanWeightImg.style.marginBottom = '25%';
+    }else if(parameter >= 71 && parameter <= 80) {
+        let imgFile = 8;
+        balanceImg.src = `images/balance_sprites/${imgFile}-modified.png`;
+        pokemonWeightImg.style.marginBottom = '19%';
+        humanWeightImg.style.marginBottom = '26%';
+    }else if(parameter >= 81 && parameter <= 90) {
+        let imgFile = 9;
+        balanceImg.src = `images/balance_sprites/${imgFile}-modified.png`;
+        pokemonWeightImg.style.marginBottom = '18%';
+        humanWeightImg.style.marginBottom = '27%';
+    }else if(parameter >= 91 && parameter <= 100) {
+        let imgFile = 10;
+        balanceImg.src = `images/balance_sprites/${imgFile}-modified.png`;
+        pokemonWeightImg.style.marginBottom = '16%';
+        humanWeightImg.style.marginBottom = '29%';
+    }else if(parameter > 100) {
+        let imgFile = 11;
+        balanceImg.src = `images/balance_sprites/${imgFile}-modified.png`;
+        pokemonWeightImg.style.marginBottom = '15%';
+        humanWeightImg.style.marginBottom = '30%';
+    }
 }
 const openPokemonSize = () => {
+    weightView.style.display = 'none';
+    sizePokemonView1.style.display = 'flex';
+    sizePokemonView2.style.display = 'block';
+    infoPokemonView1.style.display = 'none';
     infoPokemonView2.style.display = 'none';
-    sizePokemonView2.style.display = 'grid';
+    heightView.style.display = 'grid';
     pushSound.play();
     changePokemonSizeName();
-    changePokemonSizeInfo(getPokemonHeight());
+    changePokemonHeightInfo(getPokemonHeight());
     changePokemonHeightImg();
     rezisingPokemonHeightImg(getPokemonHeight(), 5.8);
+    changePokemonWeightImg(); 
+    changePokemonWeightInfo(getPokemonWeight());
+    showBalanceImg(getPokemonWeight(), 165);
+    heightButton.onclick = showPokemonHeight;
+    weightButton.onclick = showPokemonWeight; 
+}
+const showPokemonHeight = () => {
+    heightView.style.display = 'grid';
+    weightView.style.display = 'none';
+    pushSound.play();
+}
+const showPokemonWeight = () => {
+    heightView.style.display = 'none';
+    weightView.style.display = 'grid';
+    pushSound.play();
 }
 startup();

@@ -36,6 +36,10 @@
                     <button id="backPokemon" class="infoButtons"><span class="material-symbols-outlined">arrow_upward</span> BACK</button>
                     <button id="nextPokemon" class="infoButtons">NEXT <span class="material-symbols-outlined">arrow_downward</span></button>
                 </div>
+                <div class="sizePokemonView1">
+                    <button class="sizeButtons" id="heightButton">Height Check</button>
+                    <button class="sizeButtons" id="weightButton">Weight Check</button>
+                </div>
             </div>
         </div>
         <div id="container-2">
@@ -53,7 +57,7 @@
                     </div>
                 </div>
                 <div class="pokemonPhotoContainer4">
-                    <img id="pokemonImage" src="" alt="pokemon image">
+                    <img id="pokemonImage" src="#" alt="pokemon image">
                 </div>
                 <div class="infoContainer">
                     <img src="images/pokeball.png" alt="pokeball Icon">
@@ -83,29 +87,60 @@
                 <div class="sideRigthBox"></div>
             </div>
             <div id="sizePokemonView2">
-                <div class="miniHeaderSize">
-                    <h2>SIZE</h2>
-                </div>
-                <div class="lineInTheMiddleSize"></div>
-                <div class="titleSizeContainer">
-                    <h2 id="titleSizeText">Height Check</h2>
-                </div>
-                <div class="heightCheckBackground0"></div>
-                <div class="heightCheckBackground"></div>
-                <div class="sizeCheckContainer">
-                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/1.png" alt="PokemonImage" id="pokemonSizeImg">
-                    <img src="images/character_sprite.png" alt="characterSprite" id="humanSizeImg">
-                </div>
-                <div class="infoSizeContainer">
-                    <div class="infoPokemonSizeContainer">
-                        <p id="pokemonSizeName"></p>
-                        <p class="htSizePokemon">HT</p>
-                        <p id="heightSize">4''</p>
+                <div id="heightView">
+                    <div class="miniHeaderSize">
+                        <h2>SIZE</h2>
                     </div>
-                    <div class="infoHumanSizeContainer">
-                        <p class="humanName">KIM</p>
-                        <p class="htSizeHuman">HT</p>
-                        <p id="heightSizeHuman">5'8''</p>
+                    <div class="lineInTheMiddleSize"></div>
+                    <div class="titleSizeContainer">
+                        <h2 id="titleSizeText">Height Check</h2>
+                    </div>
+                        <div class="heightCheckBackground0"></div>
+                        <div class="heightCheckBackground"></div>
+                    <div class="sizeCheckContainer">
+                        <img src="#" alt="PokemonImage" id="pokemonHeightImg">
+                        <img src="images/character_sprite.png" alt="characterSprite" class="humanHeightImg" id="humanHeightImg">
+                    </div>
+                    <div class="infoSizeContainer">
+                        <div class="infoPokemonSizeContainer">
+                            <p class="pokemonSizeName"></p>
+                            <p class="sizePokemon">HT</p>
+                            <p id="heightSize">4''</p>
+                        </div>
+                        <div class="infoHumanSizeContainer">
+                            <p class="humanName">KIM</p>
+                            <p class="SizeHuman">HT</p>
+                            <p class="sizeHuman">5'8''</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="weightView">
+                    <div class="miniHeaderSize">
+                        <h2>SIZE</h2>
+                    </div>
+                    <div class="lineInTheMiddleSize"></div>
+                    <div class="titleSizeContainer">
+                        <h2 id="titleSizeText">Weight Check</h2>
+                    </div>
+                        <div class="weightCheckBackground0"></div>
+                        <div class="weightCheckBackground">
+                            <img src="images/balance_sprites/9-modified.png" alt="balance img" id="balanceImg">
+                        </div>
+                    <div class="sizeCheckContainer">
+                        <img src="#" alt="PokemonImage" id="pokemonWeightImg">
+                        <img src="images/character.png" alt="characterSprite" class="humanWeightImg" id="humanWeightImg">
+                    </div>
+                    <div class="infoSizeContainer">
+                        <div class="infoPokemonSizeContainer">
+                            <p class="pokemonSizeName"></p>
+                            <p class="sizePokemon">WT</p>
+                            <p id="weightSize">123 lbs</p>
+                        </div>
+                        <div class="infoHumanSizeContainer">
+                            <p class="humanName">KIM</p>
+                            <p class="SizeHuman">WT</p>
+                            <p class="sizeHuman">165 lbs</p>
+                        </div>
                     </div>
                 </div>
             </div>
