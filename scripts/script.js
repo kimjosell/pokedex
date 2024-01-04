@@ -277,52 +277,52 @@ const showBalanceImg = (temporalWeight, humanTemporalWeight) => {
         balanceImg.src = `images/balance_sprites/${imgFile}-modified.png`;
         pokemonWeightImg.style.marginBottom = '30%';
         humanWeightImg.style.marginBottom = '15%';
-    }else if(parameter >= 11 && parameter <= 20){
+    }else if(parameter >= 11 && parameter <= 21){
         let imgFile = 2;
         balanceImg.src = `images/balance_sprites/${imgFile}-modified.png`;
         pokemonWeightImg.style.marginBottom = '29%';
         humanWeightImg.style.marginBottom = '16%';
-    }else if(parameter >= 21 && parameter <= 30){
+    }else if(parameter >= 21 && parameter <= 31){
         let imgFile = 3;
         balanceImg.src = `images/balance_sprites/${imgFile}-modified.png`;
         pokemonWeightImg.style.marginBottom = '27%';
         humanWeightImg.style.marginBottom = '18%';
-    }else if(parameter >= 31 && parameter <= 40) {
+    }else if(parameter >= 31 && parameter <= 41) {
         let imgFile = 4;
         balanceImg.src = `images/balance_sprites/${imgFile}-modified.png`;
         pokemonWeightImg.style.marginBottom = '26%';
         humanWeightImg.style.marginBottom = '19%';
-    }else if(parameter >= 41 && parameter <= 50) {
+    }else if(parameter >= 41 && parameter <= 51) {
         let imgFile = 5;
         balanceImg.src = `images/balance_sprites/${imgFile}-modified.png`;
         pokemonWeightImg.style.marginBottom = '25%';
         humanWeightImg.style.marginBottom = '20%';
-    }else if(parameter >= 51 && parameter <= 60) {
+    }else if(parameter >= 51 && parameter <= 61) {
         let imgFile = 6;
         balanceImg.src = `images/balance_sprites/${imgFile}-modified.png`;
         pokemonWeightImg.style.marginBottom = '22%';
         humanWeightImg.style.marginBottom = '22%';
-    }else if(parameter >= 61 && parameter <= 70) {
+    }else if(parameter >= 61 && parameter <= 71) {
         let imgFile = 7;
         balanceImg.src = `images/balance_sprites/${imgFile}-modified.png`;
         pokemonWeightImg.style.marginBottom = '20%';
         humanWeightImg.style.marginBottom = '25%';
-    }else if(parameter >= 71 && parameter <= 80) {
+    }else if(parameter >= 71 && parameter <= 81) {
         let imgFile = 8;
         balanceImg.src = `images/balance_sprites/${imgFile}-modified.png`;
         pokemonWeightImg.style.marginBottom = '19%';
         humanWeightImg.style.marginBottom = '26%';
-    }else if(parameter >= 81 && parameter <= 90) {
+    }else if(parameter >= 81 && parameter <= 91) {
         let imgFile = 9;
         balanceImg.src = `images/balance_sprites/${imgFile}-modified.png`;
         pokemonWeightImg.style.marginBottom = '18%';
         humanWeightImg.style.marginBottom = '27%';
-    }else if(parameter >= 91 && parameter <= 100) {
+    }else if(parameter >= 91 && parameter <= 101) {
         let imgFile = 10;
         balanceImg.src = `images/balance_sprites/${imgFile}-modified.png`;
         pokemonWeightImg.style.marginBottom = '16%';
         humanWeightImg.style.marginBottom = '29%';
-    }else if(parameter > 100) {
+    }else if(parameter > 101) {
         let imgFile = 11;
         balanceImg.src = `images/balance_sprites/${imgFile}-modified.png`;
         pokemonWeightImg.style.marginBottom = '15%';
