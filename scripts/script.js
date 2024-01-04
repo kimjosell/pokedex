@@ -10,7 +10,7 @@ let infoPokemonView2 = document.getElementById('infoPokemonView2');
 let pokemonInfo = document.getElementById('pokemonInfo');
 let infoPokemon = document.getElementById('infoPokemon');
 let welcomeText = document.getElementById('welcomeText');
-let pokemonNumber = '';
+let pokemonNumber = 1;
 let pokemonImage = document.getElementById('pokemonImage');
 let pawPokemonImg = document.getElementById('pawPokemonImg');
 let weight = document.getElementById('weight');
@@ -39,6 +39,13 @@ let weightView = document.getElementById('weightView');
 let pokemonWeightImg = document.getElementById('pokemonWeightImg');
 let humanWeightImg = document.getElementById('humanWeightImg')
 let balanceImg = document.getElementById('balanceImg');
+let cryPokemonButton = document.getElementById('cryPokemon');
+let cryPokemonView1 = document.getElementById('cryPokemonView1');
+let cryPokemonView2 = document.getElementById('cryPokemonView2');
+let playCryButton = document.getElementById('playCryButton');
+let pokemonCry = document.getElementById('pokemonCry');
+let pokeballPlayer = document.getElementById('pokeballPlayer');
+let pokemonCryImg = document.getElementById('pokemonCryImg');
 
 const startup = async() => {
     await getMaximunNumberOfPokemons();
@@ -96,6 +103,7 @@ const goBack2 = () => {
     infoPokemonView2.style.display = 'none';
     welcomeText.style.display = 'grid';
     sizePokemonView2.style.display = 'none';
+    cryPokemonView2.style.display = 'none';
     pushSound.play();
 }
 const getNumberOfPokemon  = () => {
@@ -117,12 +125,15 @@ const openPokemonDetails = async () => {
     welcomeText.style.display = 'none';
     sizePokemonView1.style.display = 'none';
     sizePokemonView2.style.display = 'none';
+    cryPokemonView1.style.display = 'none';
+    cryPokemonView2.style.display = 'none';
     backPokemonButton.onclick = goPokemonBefore;
     nextPokemonButton.onclick = goPokemonAfter;
     changeInfoPokemon();
     playEnglishVoice();
     sizePokemonButton.onclick = openPokemonSize;
     infoPokemon.onclick = openPokemonDetails;
+    cryPokemonButton.onclick = openPokemonCry;
 }
 const goPokemonBefore = () => {
     pokemonNumber -= 1;
@@ -192,7 +203,7 @@ const removePreviousBanners = () =>{
 }
 const createBannerType = (typeName) => {
     let span = document.createElement('span');
-    span.classList.toggle(`pokemonType${typeName}`);
+    span.classList.add(`pokemonType${typeName}`);
     span.textContent = `${typeName.toUpperCase()}`;
     typesContainer.appendChild(span);
 }
@@ -335,6 +346,8 @@ const openPokemonSize = () => {
     sizePokemonView2.style.display = 'block';
     infoPokemonView1.style.display = 'none';
     infoPokemonView2.style.display = 'none';
+    cryPokemonView1.style.display = 'none';
+    cryPokemonView2.style.display = 'none';
     heightView.style.display = 'grid';
     pushSound.play();
     changePokemonSizeName();
@@ -357,4 +370,35 @@ const showPokemonWeight = () => {
     weightView.style.display = 'grid';
     pushSound.play();
 }
+const openPokemonCry = () => {
+    sizePokemonView1.style.display = 'none';
+    sizePokemonView2.style.display = 'none';
+    infoPokemonView1.style.display = 'none';
+    infoPokemonView2.style.display = 'none';
+    cryPokemonView1.style.display = 'grid';
+    cryPokemonView2.style.display = 'grid';
+    playCryButton.onclick = playPokemonCry;
+    changePokemonCryImg();
+    wavesurfer.load(`audio/Cries/v (${pokemonNumber}).wav`);
+    pushSound.play();
+}
+const changePokemonCryImg = () => {
+    pokemonCryImg.src = dataPokemon['sprites']['versions']['generation-v']['black-white']['animated']['front_default'];
+}
+const playPokemonCry = () => {
+    pokeballPlayer.classList.toggle('cryPokemonView1rotate');
+    wavesurfer.play();
+}
+const wavesurfer = WaveSurfer.create({
+    container: '#waveform',
+    waveColor: '#F8F8FF',
+    progressColor: 'paleturquoise',
+    cursorColor: '#57BAB6',
+    cursorWidth: 4,
+    barWidth: 4,
+    height: 'auto',
+    minPxPerSec: 100,
+    barRadius: 4,
+    responsive: true,
+  });
 startup();

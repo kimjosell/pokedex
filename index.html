@@ -10,6 +10,7 @@
 <body>
     <audio src="#" id="englishVoice"></audio>
     <audio src="audio/SFX_PRESS_AB.wav" id="pushSound"></audio>
+    <audio src="#" id="pokemonCry"></audio>
     <main>
         <div id="container-1">
             <div id="mainPage">
@@ -39,6 +40,12 @@
                 <div class="sizePokemonView1">
                     <button class="sizeButtons" id="heightButton">Height Check</button>
                     <button class="sizeButtons" id="weightButton">Weight Check</button>
+                </div>
+                <div id="cryPokemonView1">
+                    <img src="images/pokeball player-modified.png" alt="pokeball player" id="pokeballPlayer">
+                    <button id="playCryButton">
+                        <img src="images/play-svgrepo-com.svg" alt="play img">
+                    </button>
                 </div>
             </div>
         </div>
@@ -88,7 +95,7 @@
             </div>
             <div id="sizePokemonView2">
                 <div id="heightView">
-                    <div class="miniHeaderSize">
+                    <div class="miniHeader2">
                         <h2>SIZE</h2>
                     </div>
                     <div class="lineInTheMiddleSize"></div>
@@ -115,7 +122,7 @@
                     </div>
                 </div>
                 <div id="weightView">
-                    <div class="miniHeaderSize">
+                    <div class="miniHeader2">
                         <h2>SIZE</h2>
                     </div>
                     <div class="lineInTheMiddleSize"></div>
@@ -144,8 +151,23 @@
                     </div>
                 </div>
             </div>
+            <div id="cryPokemonView2">
+                <div class="miniHeader2">
+                    <h2>CRY</h2>
+                </div>
+                <div class="pokemonCryImgBackground">
+                    <div class="pokemonCryImgBackground1"></div>
+                </div>
+                <div class="pokemonCryImgContainer">
+                    <img src="#" alt="pokemon image" id="pokemonCryImg">
+                </div>
+                <div class="waveformContainer">
+                    <div id="waveform"></div>
+                </div>
+            </div>
         </div>
     </main>
+    <script src="https://unpkg.com/wavesurfer.js@7"></script>
     <script src="scripts/script.js"></script>
 </body>
 </html>

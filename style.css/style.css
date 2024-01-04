@@ -763,6 +763,97 @@ audio {
     width: 90%;
     text-align: center;
 }
+#cryPokemonView1 {
+    display: grid;
+    grid-template-columns: 6fr 1fr 6fr/6fr 1fr 6fr;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 75%;
+}
+#cryPokemonView1 img {
+    grid-column: 1/4;
+    grid-row: 1/4;
+    height: 350px;
+    -webkit-transition: -webkit-transform 1s;
+}
+.cryPokemonView1rotate {
+    -webkit-transform: rotate(360deg) translateZ(0);
+}
+#playCryButton {
+    background: none;
+    border: none;
+    grid-column: 2/3;
+    grid-row: 2/3;
+    z-index: 1;
+}
+#playCryButton img {
+    width: 80px;
+}
+#pokemonCry {
+    display: none;
+}
+#cryPokemonView2 {
+    display: none;
+    width: 100%;
+    height: 100%;
+    grid-template: 8% 4% 40% 6% 38% 4% / 35% 30% 35%;
+}
+.pokemonCryImgBackground {
+    grid-column: 2/3;
+    grid-row: 3/4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: solid 10px #F8F8FF;
+    background-color: #F8F8FF;
+}
+.pokemonCryImgBackground1 {
+    width: 100%;
+    height: 100%;
+    background-color: #5ead9f;
+    opacity: 0.8;
+    background-image: linear-gradient(0deg, #5ead9f 50%, #79d0c0 50%);
+    background-size: 27px 27px;
+}
+#pokemonCryImg {
+    width: 40%;
+}
+.pokemonCryImgContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-column: 2/3;
+    grid-row: 3/4;
+    z-index: 1;
+}
+.waveformContainer {
+    background-color: #F8F8FF;
+    height: auto;
+    grid-column: 1/4;
+    grid-row: 5/6;
+    display: flex;
+    align-items: center;
+}
+#waveform ::part(wrapper) {
+    --box-size: 10px;
+    background-color: #60858d;
+    opacity: 1;
+    background-image: linear-gradient(0deg, #60858d 50%, #577c83 50%);
+    background-size: 10px 10px;
+  }
+
+  #waveform ::part(cursor):after {
+    font-size: 1.5em;
+    position: absolute;
+    left: 0;
+    top: -28px;
+    transform: translateX(-50%);
+  }
+  #waveform {
+    height: 80%;
+    width: 100%;
+  }
 @media screen and (max-width: 600px) {
     main {
         display: flex;
@@ -794,7 +885,7 @@ audio {
         font-family: retrogaming;
         color: #363834;
         text-align: center;
-        font-size: 3rem;
+        font-size: 4rem;
         width: 100%;
         margin: 0;
         grid-row: 1/2;
@@ -804,7 +895,7 @@ audio {
     #welcomeText p {
         font-family: pokemonMain;
         text-align: center;
-        font-size: 2rem;
+        font-size: 1.5rem;
         width: 100%;
         grid-row: 2/3;
         grid-column: 2/3;
@@ -824,15 +915,15 @@ audio {
         text-shadow: 1px 1px #337caa;
     }
     #searchButton {
-        margin-top: 10%;
+        margin-top: 20%;
     }
     #viewPokedex {
-        margin-bottom: 10%;
+        margin-bottom: 20%;
     }
     /*responsive code por pokemon list page*/
     .searchBtn {
         font-family: retrogaming;
-        font-size: 1rem;
+        font-size: 1.5rem;
         width: 70%;
         margin-top: 3%;
         margin-bottom: 4%;
@@ -850,6 +941,9 @@ audio {
         height: 26px;
         margin-right: 4px;
     }
+    #pokemonList2{
+        height: 205px;
+    }
     .pokemonNameButton{
         display: flex;
         height: 36px;
@@ -866,15 +960,14 @@ audio {
     }
     .pokemonTextName {
         font-family: retrogaming;
-        font-size: 1.2rem;
+        font-size: 1.7rem;
         margin-left: 20px;
         color: #363834;
     }
-    #sizePokemonView
     /*responisve code for pokemon info view in screen 1*/
     .pokeButtons {
         font-family: retrogaming;
-        font-size: 1rem;
+        font-size: 1.5rem;
         width: 20%;
         margin-top: 3%;
         margin-left: 3%;
@@ -891,7 +984,7 @@ audio {
     }
     .goBackBtn {
         font-family: retrogaming;
-        font-size: 1rem;
+        font-size: 1.5rem;
         width: 20%;
         margin-top: 3%;
         margin-left: 3%;
@@ -940,7 +1033,7 @@ audio {
     #pokemonNumber {
         grid-column: 8/9;
         grid-row: 3/5;
-        margin: 12% 0 0 0;
+        margin: 10% 0 0 0;
         font-family: retrogaming;
         font-size: 1.3rem;
         color: #363834;
@@ -949,7 +1042,7 @@ audio {
     #pokemonTitleName {
         grid-column: 10/14;
         grid-row: 3/5;
-        margin: 2% 0 0 12%;
+        margin: 1.7% 0 0 0;
         font-family: retrogaming;
         font-size: 1.3rem;
         text-shadow: 1px 1px #272925;
@@ -960,9 +1053,19 @@ audio {
         bottom: 0;
         margin: 0 0 0.3rem;
         font-family: retrogaming;
-        font-size: 1.1rem;
+        font-size: 1.3rem;
         text-shadow: 1px 1px #272925;
         color: #363834;
+    }
+    .pokemonTypeResponsive {
+        font-size: 0.2rem;
+    }
+    #typesContainer span {
+        font-family: retrogaming;
+        font-size: 0.7rem;
+        margin: 1px;
+        color: #F8F8FF;
+        padding: 1px 3px;
     }
     .HT {
         grid-row: 7/8;
@@ -970,7 +1073,7 @@ audio {
         z-index: 1;
         font-family: pokemonMain;
         margin: 0.5rem 0 0 0;
-        font-size: 2rem;
+        font-size: 1.5rem;
         color: #363834;
         text-shadow: 1px 1px #272925;
     }
@@ -980,7 +1083,7 @@ audio {
         z-index: 1;
         margin: 0.3rem 0 0 0;
         font-family: pokemonMain;
-        font-size: 2rem;
+        font-size: 1.5rem;
         color: #363834;
         text-shadow: 1px 1px #272925;
     }
@@ -989,7 +1092,7 @@ audio {
         grid-row: 7/8;
         z-index: 1;
         font-family: pokemonMain;
-        font-size: 2rem;
+        font-size: 1.5rem;
         margin: 0.5rem 0 0 0;
         color: #363834;
         text-shadow: 1px 1px #272925;
@@ -1000,14 +1103,100 @@ audio {
         z-index: 1;
         margin: 0.3rem 0 0 0;
         font-family: pokemonMain;
-        font-size: 2rem;
+        font-size: 1.5rem;
         color: #363834;
         text-shadow: 1px 1px #272925;
     }
     #descriptionPokemonText {
-        font-size: 1.5rem;
+        font-size: 1.1rem;
         font-family: pokemonMain;
         margin: 2% 4%;
         text-align: center;
+    }
+    .pokemonSizeName {
+        grid-column: 1/2;
+        grid-row: 1/2;
+        font-family: pokemonMain;
+        font-size: 1.5rem;
+        margin: 0 0 0 7%;
+    }
+    .sizePokemon {
+        grid-column: 1/2;
+        grid-row: 2/3;
+        font-family: pokemonMain;
+        font-size: 1.5rem;
+        margin: 0 0 0 25%;
+    }
+    #titleSizeText {
+        font-family: pokemonMain;
+        font-size: 2rem;
+    }
+    .humanName {
+        grid-column: 1/2;
+        grid-row: 1/2;
+        font-family: pokemonMain;
+        font-size: 1.5rem;
+        margin: 0 0 0 15%;
+    }
+    #heightSize {
+        grid-column: 2/3;
+        grid-row: 2/3;
+        font-family: pokemonMain;
+        font-size: 1.5rem;
+        margin: 0 10% 0 0;
+        text-align: right;
+    }
+    .SizeHuman {
+        grid-column: 1/2;
+        grid-row: 2/3;
+        font-family: pokemonMain;
+        font-size: 1.5rem;
+        margin: 0 0 0 25%;
+    }
+    .sizeHuman {
+        grid-column: 2/3;
+        grid-row: 2/3;
+        font-family: pokemonMain;
+        font-size: 1.5rem;
+        margin: 0 0 0 0;
+        text-align: right;
+    }
+    #weightSize {
+        grid-column: 2/3;
+        grid-row: 2/3;
+        font-family: pokemonMain;
+        font-size: 1.5rem;
+        margin-left: -20%;
+        text-align: right;
+    }
+    .sizePokemonView1 {
+        width: 100%;
+        height: 70%;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+    #cryPokemonView1 img {
+        grid-column: 1/4;
+        grid-row: 1/4;
+        height: 180px;
+        -webkit-transition: -webkit-transform 1s;
+    }
+    #playCryButton img {
+        width: 42px;
+    }
+    #cryPokemonView1 {
+        display: grid;
+        grid-template-columns: 6fr 1fr 6fr/6fr 1fr 6fr;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 70%;
+    }
+    .waveformContainer {
+        grid-column: 1/4;
+        grid-row: 5/6;
+        height: 110px;
+        background-color: #F8F8FF;
     }
 }
