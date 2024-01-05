@@ -54,7 +54,6 @@ const startup = async() => {
 const getMaximunNumberOfPokemons = async () => {
     const APIResponse = await fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=10000');
     dataPokemonNamesAndNumbers = await APIResponse.json();
-    // maximunNumberOfPokemon = dataPokemonNamesAndNumbers.results.length;
     return maximunNumberOfPokemon;
 }
 const renderList = () => {
