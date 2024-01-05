@@ -115,6 +115,7 @@ const openPokedex = () => {
     pushSound.play();
 }
 const goBack1 = () => {
+    setInputValue();
     mainPage.style.display = "flex";
     pokemonList.style.display = "none";
     pushSound.play();
