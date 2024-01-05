@@ -874,9 +874,7 @@ audio {
   .hide {
     display: none;
   }
-  .pokemonListInSearch {
-    height: 310px;
-  }
+
 @media screen and (max-width: 600px) {
     main {
         display: flex;

@@ -95,7 +95,6 @@ const openSearchView = () => {
     miniHeaderList.style.display = "none";
     miniHeaderSearch.style.display = "flex";
     pokemonList2.classList.remove("pokemonList");
-    pokemonList2.classList.add("pokemonListInSearch");
     pushSound.play();
 }
 inputElement.addEventListener("input", e => {
@@ -112,9 +111,7 @@ const openPokedex = () => {
     pokemonList.style.display = "block";
     miniHeaderList.style.display = "flex";
     miniHeaderSearch.style.display = "none";
-    buttonsSearch.style.display = "none";
     pokemonList2.classList.add("pokemonList2");
-    pokemonList2.classList.remove("pokemonListInSearch");
     pushSound.play();
 }
 const goBack1 = () => {
@@ -128,7 +125,6 @@ const goBack2 = () => {
     infoPokemonView2.style.display = "none";
     miniHeaderSearch.style.display = "none";
     miniHeaderList.style.display = "flex";
-    pokemonList2.classList.remove("pokemonListInSearch");
     welcomeText.style.display = "grid";
     sizePokemonView2.style.display = "none";
     cryPokemonView2.style.display = "none";
