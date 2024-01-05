@@ -50,8 +50,6 @@ let pokemonCryImg = document.getElementById('pokemonCryImg');
 let searchButton = document.getElementById('searchButton');
 let searchButton2 = document.getElementById('searchButton2');
 const inputElement = document.querySelector('#searchInput');
-const sortByNumberBtn = document.querySelector('#sortByNumberButton');
-const sortByNameBtn = document.querySelector('#sortByNameButton');
 
 const startup = async() => {
     await getMaximunNumberOfPokemons();
@@ -64,18 +62,6 @@ const getMaximunNumberOfPokemons = async () => {
     dataPokemonNamesAndNumbers = await APIResponse.json();
     return maximunNumberOfPokemon;
 }
-const openSearchView = () => {
-    mainPage.style.display = 'none';
-    pokemonList.style.display = 'block';
-    document.getElementById('miniHeaderList').style.display = 'none';
-    document.getElementById('miniHeaderSearch').style.display = 'flex';
-    document.getElementById('buttonsSearch').style.display = 'flex';
-    sortByNumberBtn.addEventListener('click', sortListByNumber);
-    pokemonList2.classList.remove('pokemonList');
-    pokemonList2.classList.add('pokemonListInSearch');
-    pushSound.play();
-}
-
 const renderList = () => {
     let dataList = dataPokemonNamesAndNumbers.results;
     let i = 0;
@@ -100,6 +86,25 @@ const renderList = () => {
         return{ num: `${i}`, name: pokemon.name, element: pokemonNameButton }
     });
 }
+const openSearchView = () => {
+    mainPage.style.display = 'none';
+    pokemonList.style.display = 'block';
+    document.getElementById('miniHeaderList').style.display = 'none';
+    document.getElementById('miniHeaderSearch').style.display = 'flex';
+    document.getElementById('buttonsSearch').style.display = 'flex';
+    pokemonList2.classList.remove('pokemonList');
+    pokemonList2.classList.add('pokemonListInSearch');
+    pushSound.play();
+}
+inputElement.addEventListener('input', e => {
+    const value = e.target.value.toLowerCase();
+    dataPokemonList.forEach((pokemon) => {
+        const isVisible =
+        pokemon.name.toLowerCase().includes(value) ||
+        pokemon.num.toLowerCase().includes(value)
+        pokemon.element.classList.toggle("hide", !isVisible)
+    });
+});
 const openPokedex = () => {
     mainPage.style.display = 'none';
     pokemonList.style.display = 'block';
@@ -133,15 +138,6 @@ const getNumberOfPokemon  = () => {
     pokemonNumber = Number(pokemonNumber);
     openPokemonDetails();
 }
-const playEnglishVoice = () => {
-    let numberFile = pokemonNumber;
-    englishVoice.src = `audio/English/englishvoice (${numberFile}).wav`;
-    englishVoice.play();
-}
-const setInputValue = () => {
-    inputElement.value = '';
-    renderList2(inputElement.value);
-}
 const openPokemonDetails = async () => {
     setInputValue();
     await getInfoPokemon();
@@ -162,15 +158,18 @@ const openPokemonDetails = async () => {
     infoPokemon.onclick = openPokemonDetails;
     cryPokemonButton.onclick = openPokemonCry;
 }
-const goPokemonBefore = () => {
-    pokemonNumber -= 1;
-    openPokemonDetails();
-    pushSound.play();
+const setInputValue = () => {
+    inputElement.value = '';
+    renderList2(inputElement.value);
 }
-const goPokemonAfter = () => {
-    pokemonNumber += 1;
-    openPokemonDetails();
-    pushSound.play();
+const renderList2 = (e) =>{
+    const value = e;
+    dataPokemonList.forEach((pokemon) => {
+        const isVisible =
+        pokemon.name.toLowerCase().includes(value) ||
+        pokemon.num.toLowerCase().includes(value)
+        pokemon.element.classList.toggle("hide", !isVisible)
+    });
 }
 const getInfoPokemon = async () => {
     const APIResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonNumber}`);
@@ -188,6 +187,22 @@ const changeInfoPokemon = () => {
     changePokemonHeight(getPokemonHeight());
     changePokemonWeight(getPokemonWeight());
     changePokemonDescription();
+}
+const playEnglishVoice = () => {
+    let numberFile = pokemonNumber;
+    englishVoice.src = `audio/English/englishvoice (${numberFile}).wav`;
+    englishVoice.play();
+}
+
+const goPokemonBefore = () => {
+    pokemonNumber -= 1;
+    openPokemonDetails();
+    pushSound.play();
+}
+const goPokemonAfter = () => {
+    pokemonNumber += 1;
+    openPokemonDetails();
+    pushSound.play();
 }
 const changePokemonPhoto = () => {
     pokemonImage.src = dataPokemon['sprites']['versions']['generation-v']['black-white']['animated']['front_default'];
@@ -425,30 +440,6 @@ const wavesurfer = WaveSurfer.create({
     barRadius: 4,
     responsive: true,
   });
-inputElement.addEventListener('input', e => {
-    const value = e.target.value.toLowerCase();
-    dataPokemonList.forEach((pokemon) => {
-        const isVisible =
-        pokemon.name.toLowerCase().includes(value) ||
-        pokemon.num.toLowerCase().includes(value)
-        pokemon.element.classList.toggle("hide", !isVisible)
-    });
-});
-const renderList2 = (e) =>{
-    const value = e;
-    dataPokemonList.forEach((pokemon) => {
-        const isVisible =
-        pokemon.name.toLowerCase().includes(value) ||
-        pokemon.num.toLowerCase().includes(value)
-        pokemon.element.classList.toggle("hide", !isVisible)
-    });
-}
-const compareNumbers = (a, b) => {
-    return a - b;
-}
-const sortListByNumber = () => {
-    console.log(dataPokemonList);
-    dataPokemonList.sort(compareNumbers);
-    console.log(dataPokemonList);
-}
+
+
 startup();

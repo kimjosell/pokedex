@@ -868,30 +868,6 @@ audio {
   .searchInput::placeholder {
     color: #F8F8FF;
   }
-  .sortWrapper {
-    display: flex;
-    justify-content: space-around;
-  }
-  .sortButton {
-    margin-top: 1%;
-    font-family: retrogaming;
-    font-size: 2rem;
-    background-color: #77B0D3;
-    color: #F8F8FF;
-    border: none;
-    border-radius: 6px;
-    padding: 2% 5%;
-    box-shadow: 0 6px #337caa;
-  }
-  .sortButton:active {
-    box-shadow: 0 3px #337caa;
-    transform: translateY(3px);
-  }
-  #noFoundMessage {
-    font-family: pokemonMain;
-    font-size: 4rem;
-    text-align: center;
-  }
   .searchGlassImg {
     height: 5rem;
   }
@@ -1244,5 +1220,16 @@ audio {
         grid-row: 5/6;
         height: 110px;
         background-color: #F8F8FF;
+    }
+    .searchInput {
+        font-family: pokemonMain;
+        font-size:2rem;
+        width: 55%;
+        background-color: #A3D1A1;
+        color: #F8F8FF;
+        border: solid 3px #363834;
+    }
+    .searchGlassImg {
+        height: 3rem;
     }
 }
