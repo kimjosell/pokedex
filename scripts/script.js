@@ -1,5 +1,6 @@
-let maximunNumberOfPokemon = 649;
+let maximunNumberOfPokemon = 648;
 let dataPokemonNamesAndNumbers = [];
+let dataPokemonList = [];
 let dataPokemon = [];
 let speciesDataPokemon = [];
 let fontSizePokemonName = '';
@@ -46,28 +47,48 @@ let playCryButton = document.getElementById('playCryButton');
 let pokemonCry = document.getElementById('pokemonCry');
 let pokeballPlayer = document.getElementById('pokeballPlayer');
 let pokemonCryImg = document.getElementById('pokemonCryImg');
+let searchButton = document.getElementById('searchButton');
+let searchButton2 = document.getElementById('searchButton2');
+const inputElement = document.querySelector('#searchInput');
+const sortByNumberBtn = document.querySelector('#sortByNumberButton');
+const sortByNameBtn = document.querySelector('#sortByNameButton');
 
 const startup = async() => {
     await getMaximunNumberOfPokemons();
+    searchButton.addEventListener('click', openSearchView);
+    searchButton2.addEventListener('click', openSearchView);
     renderList();
 }
 const getMaximunNumberOfPokemons = async () => {
-    const APIResponse = await fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=10000');
+    const APIResponse = await fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=649');
     dataPokemonNamesAndNumbers = await APIResponse.json();
     return maximunNumberOfPokemon;
 }
+const openSearchView = () => {
+    mainPage.style.display = 'none';
+    pokemonList.style.display = 'block';
+    document.getElementById('miniHeaderList').style.display = 'none';
+    document.getElementById('miniHeaderSearch').style.display = 'flex';
+    document.getElementById('buttonsSearch').style.display = 'flex';
+    sortByNumberBtn.addEventListener('click', sortListByNumber);
+    pokemonList2.classList.remove('pokemonList');
+    pokemonList2.classList.add('pokemonListInSearch');
+    pushSound.play();
+}
+
 const renderList = () => {
-    for (let i = 0; i <= maximunNumberOfPokemon-1; i++) {
+    let dataList = dataPokemonNamesAndNumbers.results;
+    let i = 0;
+    dataPokemonList = dataList.map((pokemon) => {
         let pokemonNameButton = document.createElement('button');
         pokemonNameButton.classList.add('pokemonNameButton');
         pokemonNameButton.onclick = getNumberOfPokemon;
+        pokemonNameButton.name = `${i+1}`;
         let span = document.createElement('span');
         span.classList.add('pokemonTextName');
-        pokemonNameButton.name = `${i+1}`;
         span.name =`${i+1}`;
-        span.textContent = `${i+1} ${dataPokemonNamesAndNumbers.results[i].name.toUpperCase()}`;
-        let textLength = span.textContent.length;
-        span.style.fontSize = (makePokemonNameSmall(textLength));
+        span.textContent = `${i+1} ${pokemon.name.toUpperCase()}`;
+        span.textContent = span.textContent.substring(0,14);
         let img = document.createElement('img');
         img.classList.add('pokeballImgIcon');
         img.src = 'images/pokeball.png';
@@ -75,20 +96,18 @@ const renderList = () => {
         pokemonNameButton.appendChild(span);
         pokemonNameButton.appendChild(img);
         pokemonList2.appendChild(pokemonNameButton);
-}
-}
-const makePokemonNameSmall = (textLength) => {
-    if (textLength >= 19 && textLength <=20) {
-        return  '1.8rem';
-    } else if (textLength >= 21 && textLength <= 27) {
-        return '1.6rem';
-    }else if (textLength >= 28){
-        return '1.5rem';
-    }
+        i += 1;
+        return{ num: `${i}`, name: pokemon.name, element: pokemonNameButton }
+    });
 }
 const openPokedex = () => {
     mainPage.style.display = 'none';
     pokemonList.style.display = 'block';
+    document.getElementById('miniHeaderList').style.display = 'flex';
+    document.getElementById('miniHeaderSearch').style.display = 'none';
+    document.getElementById('buttonsSearch').style.display = 'none';
+    pokemonList2.classList.add('pokemonList2');
+    pokemonList2.classList.remove('pokemonListInSearch');
     pushSound.play();
 }
 const goBack1 = () => {
@@ -100,6 +119,10 @@ const goBack2 = () => {
     pokemonInfo.style.display = 'none';
     pokemonList.style.display = 'block';
     infoPokemonView2.style.display = 'none';
+    document.getElementById('buttonsSearch').style.display = 'none';
+    document.getElementById('miniHeaderSearch').style.display = 'none';
+    document.getElementById('miniHeaderList').style.display = 'flex';
+    pokemonList2.classList.remove('pokemonListInSearch');
     welcomeText.style.display = 'grid';
     sizePokemonView2.style.display = 'none';
     cryPokemonView2.style.display = 'none';
@@ -115,7 +138,12 @@ const playEnglishVoice = () => {
     englishVoice.src = `audio/English/englishvoice (${numberFile}).wav`;
     englishVoice.play();
 }
+const setInputValue = () => {
+    inputElement.value = '';
+    renderList2(inputElement.value);
+}
 const openPokemonDetails = async () => {
+    setInputValue();
     await getInfoPokemon();
     infoPokemonView1.style.display = 'flex';
     infoPokemonView2.style.display = 'grid';
@@ -149,8 +177,6 @@ const getInfoPokemon = async () => {
     dataPokemon = await APIResponse.json();
     const APIResponse2 = await fetch(dataPokemon.species.url);
     speciesDataPokemon = await APIResponse2.json();
-    console.log(dataPokemon);
-    console.log(speciesDataPokemon);
 }
 const changeInfoPokemon = () => {
     changePokemonNumber();
@@ -239,7 +265,6 @@ const changePokemonWeight = (temporalWeight) => {
 }
 const changePokemonDescription = () =>{
     let descriptionPokemonTextIndex = speciesDataPokemon.flavor_text_entries.find((entry) => entry.version.name === 'white-2');
-    console.log(descriptionPokemonTextIndex);
     descriptionPokemonText.textContent = `${descriptionPokemonTextIndex.flavor_text}`;
 }
 const changePokemonHeightInfo = (temporalHeight) => {
@@ -400,4 +425,30 @@ const wavesurfer = WaveSurfer.create({
     barRadius: 4,
     responsive: true,
   });
+inputElement.addEventListener('input', e => {
+    const value = e.target.value.toLowerCase();
+    dataPokemonList.forEach((pokemon) => {
+        const isVisible =
+        pokemon.name.toLowerCase().includes(value) ||
+        pokemon.num.toLowerCase().includes(value)
+        pokemon.element.classList.toggle("hide", !isVisible)
+    });
+});
+const renderList2 = (e) =>{
+    const value = e;
+    dataPokemonList.forEach((pokemon) => {
+        const isVisible =
+        pokemon.name.toLowerCase().includes(value) ||
+        pokemon.num.toLowerCase().includes(value)
+        pokemon.element.classList.toggle("hide", !isVisible)
+    });
+}
+const compareNumbers = (a, b) => {
+    return a - b;
+}
+const sortListByNumber = () => {
+    console.log(dataPokemonList);
+    dataPokemonList.sort(compareNumbers);
+    console.log(dataPokemonList);
+}
 startup();

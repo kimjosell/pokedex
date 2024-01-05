@@ -106,7 +106,8 @@ audio {
 .miniHeader {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-around;
+    align-items: center;
     width: 100%;
     background-color: #EDD29B;
     border-bottom: solid #363834;
@@ -152,7 +153,7 @@ audio {
     box-shadow: 0 2px #4ca049;
     transform: translateY(2px);
 }
-#pokemonList2 {
+.pokemonList2 {
     height: 380px;
     overflow-y: scroll;
 }
@@ -852,6 +853,53 @@ audio {
   #waveform {
     height: 80%;
     width: 100%;
+  }
+  #searchView {
+    display: none;
+  }
+  .searchInput {
+    font-family: pokemonMain;
+    font-size: 3rem;
+    width: 55%;
+    background-color: #A3D1A1;
+    color: #F8F8FF;
+    border: solid 3px #363834;
+  }
+  .searchInput::placeholder {
+    color: #F8F8FF;
+  }
+  .sortWrapper {
+    display: flex;
+    justify-content: space-around;
+  }
+  .sortButton {
+    margin-top: 1%;
+    font-family: retrogaming;
+    font-size: 2rem;
+    background-color: #77B0D3;
+    color: #F8F8FF;
+    border: none;
+    border-radius: 6px;
+    padding: 2% 5%;
+    box-shadow: 0 6px #337caa;
+  }
+  .sortButton:active {
+    box-shadow: 0 3px #337caa;
+    transform: translateY(3px);
+  }
+  #noFoundMessage {
+    font-family: pokemonMain;
+    font-size: 4rem;
+    text-align: center;
+  }
+  .searchGlassImg {
+    height: 5rem;
+  }
+  .hide {
+    display: none;
+  }
+  .pokemonListInSearch {
+    height: 310px;
   }
 @media screen and (max-width: 600px) {
     main {
