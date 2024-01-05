@@ -50,6 +50,9 @@ let pokemonCryImg = document.getElementById("pokemonCryImg");
 let searchButton = document.getElementById("searchButton");
 let searchButton2 = document.getElementById("searchButton2");
 const inputElement = document.querySelector("#searchInput");
+let miniHeaderList = document.getElementById("miniHeaderList");
+let miniHeaderSearch = document.getElementById("miniHeaderSearch");
+let buttonsSearch = document.getElementById("buttonsSearch")
 
 const startup = async() => {
     await getMaximunNumberOfPokemons();
@@ -89,9 +92,8 @@ const renderList = () => {
 const openSearchView = () => {
     mainPage.style.display = "none";
     pokemonList.style.display = "block";
-    document.getElementById("miniHeaderList").style.display = "none";
-    document.getElementById("miniHeaderSearch").style.display = "flex";
-    document.getElementById("buttonsSearch").style.display = "flex";
+    miniHeaderList.style.display = "none";
+    miniHeaderSearch.style.display = "flex";
     pokemonList2.classList.remove("pokemonList");
     pokemonList2.classList.add("pokemonListInSearch");
     pushSound.play();
@@ -108,9 +110,9 @@ inputElement.addEventListener("input", e => {
 const openPokedex = () => {
     mainPage.style.display = "none";
     pokemonList.style.display = "block";
-    document.getElementById("miniHeaderList").style.display = "flex";
-    document.getElementById("miniHeaderSearch").style.display = "none";
-    document.getElementById("buttonsSearch").style.display = "none";
+    miniHeaderList.style.display = "flex";
+    miniHeaderSearch.style.display = "none";
+    buttonsSearch.style.display = "none";
     pokemonList2.classList.add("pokemonList2");
     pokemonList2.classList.remove("pokemonListInSearch");
     pushSound.play();
@@ -124,9 +126,8 @@ const goBack2 = () => {
     pokemonInfo.style.display = "none";
     pokemonList.style.display = "block";
     infoPokemonView2.style.display = "none";
-    document.getElementById("buttonsSearch").style.display = "none";
-    document.getElementById("miniHeaderSearch").style.display = "none";
-    document.getElementById("miniHeaderList").style.display = "flex";
+    miniHeaderSearch.style.display = "none";
+    miniHeaderList.style.display = "flex";
     pokemonList2.classList.remove("pokemonListInSearch");
     welcomeText.style.display = "grid";
     sizePokemonView2.style.display = "none";
