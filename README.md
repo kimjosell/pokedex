@@ -15,7 +15,7 @@
 <h3 align="center">Pokedex</h3>
 
   <p align="center">
-    Pokedex form I to V generation of Pokemon, with footprints and cries of all pokemons!!
+    Pokedex from I to V generation of Pokemon, with footprints and cries of all pokemons!!
     <br />
     <a href="https://github.com/kimjosell/pokedex"><strong>Explore the docs »</strong></a>
     <br />
